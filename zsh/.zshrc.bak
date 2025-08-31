@@ -8,12 +8,6 @@ alias ls='l'
 alias la='l -l --time-style="+%Y-%m-%d %H:%M" --no-permissions --octal-permissions'
 alias tree='l --tree'
 
-<<<<<<< HEAD
-=======
-# lsd Alias
-alias ls='lsd --icon=always'
-
->>>>>>> 61e46f7 (Update zsh and tmux configs)
 # Aliases: git
 alias ga='git add'
 alias gap='ga --patch'
@@ -243,33 +237,11 @@ ze() {
 }
 
 # Plugin: autosuggestions
-# --- zsh-autosuggestions ---
-if [ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
-  source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-elif [ -f /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+if [[ -n "$TERMUX_VERSION" ]]; then
+  source ~/third-party/zsh-autosuggestions/zsh-autosuggestions.zsh
+else
   source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-elif [ -f ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
-  source ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-elif [ -f ~/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
-  source ~/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-else
-  print -P "%F{yellow}[zsh] autosuggestions plugin not found%f"
 fi
-
-# --- zsh-syntax-highlighting ---
-if [ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
-  source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-elif [ -f ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
-  source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-elif [ -f ~/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
-  source ~/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-else
-  print -P "%F{yellow}[zsh] syntax-highlighting plugin not found%f"
-fi
-
-# Ensure styles array exists even if plugin defines it late
-typeset -gA ZSH_HIGHLIGHT_STYLES
-
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#606090'
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
@@ -277,7 +249,9 @@ ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=40
 
 # Plugin: syntax highlighting
 if [[ -n "$TERMUX_VERSION" ]]; then
+  source ~/third-party/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 else
+  source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
@@ -304,11 +278,6 @@ ZSH_HIGHLIGHT_STYLES[suffix-alias]='fg=magenta'
 ZSH_HIGHLIGHT_STYLES[global-alias]='fg=magenta'
 ZSH_HIGHLIGHT_STYLES[arg0]='fg=magenta'
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 61e46f7 (Update zsh and tmux configs)
 # Strings
 ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=green'
 ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=green'
@@ -319,19 +288,3 @@ ZSH_HIGHLIGHT_STYLES[redirection]='fg=cyan'
 
 # Paths
 ZSH_HIGHLIGHT_STYLES[path]='none'
-
-# --- Auto-start tmux ---
-if command -v tmux &> /dev/null; then
-  # Only auto-start if we're not already inside tmux
-  if [ -z "$TMUX" ]; then
-    # Attach to an existing session or create a new one
-    tmux attach -t default || tmux new -s default
-  fi
-fi
-<<<<<<< HEAD
-=======
-
-eval "$(~/.local/bin/mise activate zsh)"
-eval $(perl -I ~/perl5/lib/perl5/ -Mlocal::lib)
-eval "$(zoxide init zsh)"
->>>>>>> 61e46f7 (Update zsh and tmux configs)
