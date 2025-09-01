@@ -1,0 +1,40 @@
+palette = "grey"
+format = """$directory$git_branch$git_status$fill[$python](grey)$time$line_break$character"""
+
+[character]
+success_symbol = "[@](bold green)"
+error_symbol   = "[@](bold red)"
+
+[fill]
+symbol = "─"
+style  = "#222222"
+
+[time]
+disabled    = false
+time_format = "%F %T"
+style       = "#444444"
+format      = "[$time]($style)"
+
+[python]
+symbol = "py "
+format = "via [$symbol$version]($style) "
+style  = "#777777"
+
+[git_branch]
+symbol = "git "
+format = " on [$symbol$branch]($style) "
+style  = "#777777"
+
+# show something only when dirty (keeps it clean like the screenshot)
+[git_status]
+style  = "#777777"
+format = "[$all_status]($style) "
+untracked = "!"
+modified  = "!"
+staged    = "!"
+renamed   = "!"
+deleted   = "!"
+
+[palettes.grey]
+grey = "#777777"
+
